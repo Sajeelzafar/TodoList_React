@@ -40,17 +40,15 @@ const Container = () => {
   };
 
   const handleChange = (id) => {
-    settodoList((prevState) => 
-      prevState.map((element) => {
-        if (element.id === id) {
-          return {
-            ...element,
-            completed: !element.completed,
-          };
-        }
-        return element;
-      })
-    );
+    settodoList((prevState) => prevState.map((element) => {
+      if (element.id === id) {
+        return {
+          ...element,
+          completed: !element.completed,
+        };
+      }
+      return element;
+    }));
   };
 
   const itemToDel = (id) => {
