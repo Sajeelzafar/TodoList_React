@@ -10,25 +10,44 @@ class Container extends React.Component {
         {
           id: 1,
           title: 'First task',
-          completed: true,
+          completed: false,
         },
         {
           id: 2,
           title: 'Second task',
-          completed: true,
+          completed: false,
         },
         {
           id: 3,
           title: 'Third task',
-          completed: true,
+          completed: false,
         },
         {
           id: 4,
           title: 'Fourth task',
-          completed: true,
+          completed: false,
         },
       ],
     };
+  }
+
+  handleChange = (id) => {
+    this.setState(prevState => ({
+        todoList: prevState.todoList.map(element => {
+            if (element.id === id){
+                return {
+                    ...element,
+                    completed: !element.completed,
+                  }
+            }
+            return element;
+        })
+        
+    })) 
+  };
+
+  itemToDel =(id) => {
+    console.log("deleted", id);
   }
 
   render() {
@@ -36,7 +55,7 @@ class Container extends React.Component {
     return (
       <div>
         <Header />
-        <List todoList={todoList} />
+        <List todoList={todoList} handleChangeProps={this.handleChange} deleteTodoItem={this.itemToDel}/>
       </div>
     // <ul>
     //     {this.state.todoList.map(element => (

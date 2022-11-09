@@ -10,7 +10,8 @@ class List extends React.PureComponent {
 
       <ul>
         {this.props.todoList.map((element) => (
-          <Item key={element.id} todoItem={element} />
+          <Item key={element.id} todoItem={element} handleChangeProps={this.props.handleChangeProps}
+          deleteTodoItem={this.props.deleteTodoItem}/>
         ))}
       </ul>
     );
