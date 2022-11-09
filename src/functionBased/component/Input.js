@@ -1,50 +1,42 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
-class Input extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      title: '',
-    };
-  }
+const Input = (props) => {
+  const [inputText, setInputText] = useState({
+    title: '',
+  });
 
-      onChange = (e) => {
-        this.setState({
-          [e.target.name]: e.target.value,
-        });
-      }
+  const onChange = (e) => {
+    setInputText({
+      ...inputText,
+      [e.target.name]: e.target.value,
+    });
+  };
 
-      handleSubmit = (e) => {
-        e.preventDefault();
-        const { title } = this.state;
-        if (title.trim()) {
-          this.props.addinput(title);
-          this.setState({
-            title: '',
-          });
-        } else {
-          alert('Input field is empty');
-          this.setState({
-            title: '',
-          });
-        }
-      };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (inputText.title.trim()) {
+      props.addinput(inputText.title);
+      setInputText({
+        title: '',
+      });
+    } else {
+      alert('Please write item');
+    }
+  };
 
-      render() {
-        const { title } = this.state;
-        return (
-          <form onSubmit={this.handleSubmit} className="form-container">
-            <input
-              type="text"
-              className="input-text"
-              placeholder="Add todo..."
-              value={title}
-              name="title"
-              onChange={this.onChange}
-            />
-            <button type="button">Submit</button>
-          </form>
-        );
-      }
-}
+  return (
+    <form onSubmit={handleSubmit} className="form-container">
+      <input
+        type="text"
+        className="input-text"
+        placeholder="Add todo..."
+        value={inputText.title}
+        name="title"
+        onChange={onChange}
+      />
+      <button type="button" className="input-submit">Submit</button>
+    </form>
+  );
+};
+
 export default Input;
