@@ -1,6 +1,8 @@
 import React from 'react';
 import List from './list';
-import Header from "./Header"
+import Header from "./Header";
+import Input from "./Input";
+import { v4 as uuidv4 } from "uuid";
 
 class Container extends React.Component {
   constructor(props) {
@@ -8,27 +10,38 @@ class Container extends React.Component {
     this.state = {
       todoList: [
         {
-          id: 1,
+          id: uuidv4(),
           title: 'First task',
           completed: false,
         },
         {
-          id: 2,
+          id: uuidv4(),
           title: 'Second task',
           completed: false,
         },
         {
-          id: 3,
+          id: uuidv4(),
           title: 'Third task',
           completed: false,
         },
         {
-          id: 4,
+          id: uuidv4(),
           title: 'Fourth task',
           completed: false,
         },
       ],
     };
+  }
+
+  addinput = (title) => {
+    const newtodoList = {
+        id: uuidv4(),
+        title: title,
+        completed: false
+      };
+      this.setState({
+        todoList: [...this.state.todoList, newtodoList]
+      });
   }
 
   handleChange = (id) => {
@@ -48,6 +61,13 @@ class Container extends React.Component {
 
   itemToDel =(id) => {
     console.log("deleted", id);
+    this.setState({
+        todoList: [
+          ...this.state.todoList.filter(todo => {
+            return todo.id !== id;
+          })
+        ]
+      });
   }
 
   render() {
@@ -55,6 +75,7 @@ class Container extends React.Component {
     return (
       <div>
         <Header />
+        <Input addinput = {this.addinput}/>
         <List todoList={todoList} handleChangeProps={this.handleChange} deleteTodoItem={this.itemToDel}/>
       </div>
     // <ul>
