@@ -8,29 +8,25 @@ class Container extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      todoList: [
-        {
-          id: uuidv4(),
-          title: 'First task',
-          completed: false,
-        },
-        {
-          id: uuidv4(),
-          title: 'Second task',
-          completed: false,
-        },
-        {
-          id: uuidv4(),
-          title: 'Third task',
-          completed: false,
-        },
-        {
-          id: uuidv4(),
-          title: 'Fourth task',
-          completed: false,
-        },
-      ],
+      todoList: [],
     };
+  }
+
+  componentDidMount() {
+    const temp = localStorage.getItem('todoList');
+    const loadedTodos = JSON.parse(temp);
+    if (loadedTodos) {
+      this.setState({
+        todoList: loadedTodos,
+      });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.todoList !== this.state.todoList) {
+      const temp = JSON.stringify(this.state.todoList);
+      localStorage.setItem('todoList', temp);
+    }
   }
 
   addinput = (title) => {

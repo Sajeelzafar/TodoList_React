@@ -6,17 +6,21 @@ class Item extends React.PureComponent {
       editing: false,
     }
 
+    componentWillUnmount() {
+        console.log("Cleaning up...")
+      }
+
     handleEditing = () => {
       this.setState({
         editing: true,
       });
     }
 
-    handleUpdatedDone = event => {
-        if (event.key === "Enter") {
-            this.setState({ editing: false })
-          }
+    handleUpdatedDone = (event) => {
+      if (event.key === 'Enter') {
+        this.setState({ editing: false });
       }
+    }
 
     render() {
       const viewMode = {};
