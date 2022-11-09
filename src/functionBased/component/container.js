@@ -1,5 +1,7 @@
+/* eslint-disable */
 import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { Route } from 'react-router-dom';
 import List from './list';
 import Header from './Header';
 import Input from './Input';
@@ -58,18 +60,19 @@ const Container = () => {
   };
 
   return (
-    <div className="container">
-      <div className="inner">
-        <Header />
-        <Input addinput={addinput} />
-        <List
-          todoList={todoList}
-          handleChangeProps={handleChange}
-          deleteTodoItem={itemToDel}
-          setUpdate={setUpdate}
-        />
+      <div className="container">
+        <div className="inner">
+          <Header />
+          <Input addinput={addinput} />
+          <List
+            todoList={todoList}
+            handleChangeProps={handleChange}
+            deleteTodoItem={itemToDel}
+            setUpdate={setUpdate}
+          />
+        </div>
       </div>
-    </div>
+    
   );
 };
 
