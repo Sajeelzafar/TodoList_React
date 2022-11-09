@@ -1,8 +1,8 @@
 import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import List from './list';
-import Header from "./Header";
-import Input from "./Input";
-import { v4 as uuidv4 } from "uuid";
+import Header from './Header';
+import Input from './Input';
 
 class Container extends React.Component {
   constructor(props) {
@@ -35,38 +35,50 @@ class Container extends React.Component {
 
   addinput = (title) => {
     const newtodoList = {
-        id: uuidv4(),
-        title: title,
-        completed: false
-      };
-      this.setState({
-        todoList: [...this.state.todoList, newtodoList]
-      });
+      id: uuidv4(),
+      title,
+      completed: false,
+    };
+    this.setState((prevState) => ({
+      todoList: [...prevState.todoList, newtodoList],
+    }));
+  }
+
+  setUpdate = (updatedTitle, id) => {
+    this.setState({
+      todoList: this.state.todoList.map((todo) => {
+        if (todo.id === id) {
+          return {
+            ...todo,
+            title: updatedTitle,
+          };
+        }
+        return todo;
+      }),
+    });
   }
 
   handleChange = (id) => {
-    this.setState(prevState => ({
-        todoList: prevState.todoList.map(element => {
-            if (element.id === id){
-                return {
-                    ...element,
-                    completed: !element.completed,
-                  }
-            }
-            return element;
-        })
-        
-    })) 
+    this.setState((prevState) => ({
+      todoList: prevState.todoList.map((element) => {
+        if (element.id === id) {
+          return {
+            ...element,
+            completed: !element.completed,
+          };
+        }
+        return element;
+      }),
+
+    }));
   };
 
   itemToDel =(id) => {
-    this.setState({
-        todoList: [
-          ...this.state.todoList.filter(todo => {
-            return todo.id !== id;
-          })
-        ]
-      });
+    this.setState((prevState) => ({
+      todoList: [
+        ...prevState.todoList.filter((todo) => todo.id !== id),
+      ],
+    }));
   }
 
   render() {
@@ -74,9 +86,14 @@ class Container extends React.Component {
     return (
       <div className="container">
         <div className="inner">
-            <Header />
-            <Input addinput = {this.addinput}/>
-            <List todoList={todoList} handleChangeProps={this.handleChange} deleteTodoItem={this.itemToDel}/>
+          <Header />
+          <Input addinput={this.addinput} />
+          <List
+            todoList={todoList}
+            handleChangeProps={this.handleChange}
+            deleteTodoItem={this.itemToDel}
+            setUpdate={this.setUpdate}
+          />
         </div>
       </div>
     // <ul>

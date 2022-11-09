@@ -3,15 +3,20 @@ import Item from './item';
 
 class List extends React.PureComponent {
   render() {
-    // const { Todolist } = this.props;
+    const { todoList } = this.props;
     // console.log(Todolist);
     // console.log('this props is', this.props);
     return (
 
       <ul>
-        {this.props.todoList.map((element) => (
-          <Item key={element.id} todoItem={element} handleChangeProps={this.props.handleChangeProps}
-          deleteTodoItem={this.props.deleteTodoItem}/>
+        {todoList.map((element) => (
+          <Item
+            key={element.id}
+            todoItem={element}
+            handleChangeProps={this.props.handleChangeProps}
+            deleteTodoItem={this.props.deleteTodoItem}
+            setUpdate={this.props.setUpdate}
+          />
         ))}
       </ul>
     );
