@@ -60,7 +60,6 @@ class Container extends React.Component {
   };
 
   itemToDel =(id) => {
-    console.log("deleted", id);
     this.setState({
         todoList: [
           ...this.state.todoList.filter(todo => {
@@ -73,10 +72,12 @@ class Container extends React.Component {
   render() {
     const { todoList } = this.state;
     return (
-      <div>
-        <Header />
-        <Input addinput = {this.addinput}/>
-        <List todoList={todoList} handleChangeProps={this.handleChange} deleteTodoItem={this.itemToDel}/>
+      <div className="container">
+        <div className="inner">
+            <Header />
+            <Input addinput = {this.addinput}/>
+            <List todoList={todoList} handleChangeProps={this.handleChange} deleteTodoItem={this.itemToDel}/>
+        </div>
       </div>
     // <ul>
     //     {this.state.todoList.map(element => (

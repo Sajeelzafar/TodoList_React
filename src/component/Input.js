@@ -24,9 +24,10 @@ class Input extends Component {
         }
       };
   render() {
+    const {title} = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input type="text" placeholder="Add todo..." value={this.state.title} name="title" onChange={this.onChange}/>
+      <form onSubmit={this.handleSubmit} className="form-container">
+        <input type="text" className="input-text" placeholder="Add todo..." value={title} name="title" onChange={this.onChange}/>
         <button>Submit</button>
       </form>
     )
