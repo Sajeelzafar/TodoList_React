@@ -1,10 +1,10 @@
 /* eslint-disable */
 import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { Route } from 'react-router-dom';
 import List from './list';
 import Header from './Header';
 import Input from './Input';
+import Navbar from "./Navbar";
 
 function getInitialTodos() {
   // getting stored items
@@ -60,7 +60,10 @@ const Container = () => {
   };
 
   return (
-      <div className="container">
+
+
+    <div className="container">
+      <Navbar />
         <div className="inner">
           <Header />
           <Input addinput={addinput} />
@@ -73,6 +76,8 @@ const Container = () => {
         </div>
       </div>
     
+
+      
   );
 };
 
